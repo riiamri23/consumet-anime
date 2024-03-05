@@ -23,14 +23,14 @@ export const redis =
     password: process.env.REDIS_PASSWORD,
   });
 
-const fastify = Fastify({
-  maxParamLength: 1000,
-  logger: true,
-});
 export const tmdbApi = process.env.TMDB_KEY && process.env.TMDB_KEY;
 (async () => {
   const PORT = Number(process.env.PORT) || 3000;
 
+  const fastify = Fastify({
+    maxParamLength: 1000,
+    logger: true,
+  });
   await fastify.register(FastifyCors, {
     origin: '*',
     methods: 'GET',
@@ -145,9 +145,10 @@ export const tmdbApi = process.env.TMDB_KEY && process.env.TMDB_KEY;
   try {
     fastify.get('/', (_, rp) => {
       rp.status(200).send(
-        `Welcome to consumet api! 🎉 \n${process.env.NODE_ENV === 'DEMO'
-          ? 'This is a demo of the api. You should only use this for testing purposes.'
-          : ''
+        `Welcome to consumet api! 🎉 \n${
+          process.env.NODE_ENV === 'DEMO'
+            ? 'This is a demo of the api. You should only use this for testing purposes.'
+            : ''
         }`,
       );
     });
@@ -167,7 +168,3 @@ export const tmdbApi = process.env.TMDB_KEY && process.env.TMDB_KEY;
     process.exit(1);
   }
 })();
-export default async function handler(req: any, res: any) {
-  await fastify.ready()
-  fastify.server.emit('request', req, res)
-}

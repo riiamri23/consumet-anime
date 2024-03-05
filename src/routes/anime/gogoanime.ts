@@ -20,7 +20,6 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         '/movies',
         '/popular',
         '/recent-episodes',
-        '/anime-list',
       ],
       documentation: 'https://docs.consumet.org/#tag/gogoanime',
     });
@@ -173,22 +172,6 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         const page = (request.query as { page: number }).page;
 
         const res = await gogoanime.fetchRecentEpisodes(page, type);
-
-        reply.status(200).send(res);
-      } catch (err) {
-        reply
-          .status(500)
-          .send({ message: 'Something went wrong. Contact developers for help.' });
-      }
-    },
-  );
-  fastify.get(
-    '/anime-list',
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      try {
-        const page = (request.query as { page: number }).page;
-
-        const res = await gogoanime.fetchAnimeList(page);
 
         reply.status(200).send(res);
       } catch (err) {
