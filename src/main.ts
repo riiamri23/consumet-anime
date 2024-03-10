@@ -23,6 +23,7 @@ export const redis =
     password: process.env.REDIS_PASSWORD,
   });
 
+
 const fastify = Fastify({
   maxParamLength: 1000,
   logger: true,
