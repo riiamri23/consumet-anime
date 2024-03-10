@@ -1,48 +1,99 @@
-
 {
-    "name": "api.consumet.org",
-    "version": "1.0.0",
-    "main": "src/main.ts",
+    "name": "@consumet/extensions",
+    "version": "1.5.6",
+    "description": "Nodejs library that provides high-level APIs for obtaining information on various entertainment media such as books, movies, comic books, anime, manga, and so on.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
-        "start": "ts-node src/main.ts",
-        "dev": "nodemon src/main.ts",
-        "build": "tsc",
-        "lint": "prettier --write \"src/**/*.ts\""
+        "build": "rimraf dist && tsc -p tsconfig.json",
+        "version": "auto-changelog -p && git add CHANGELOG.md",
+        "lint": "prettier --write .",
+        "prepare": "husky install",
+        "test": "jest",
+        "test:gogoanime": "jest ./test/anime/gogoanime.test.ts",
+        "test:animeunity": "jest ./test/anime/animeunity.test.ts",
+        "test:anime": "jest ./test/anime",
+        "test:books": "jest ./test/books/libgen.test.ts",
+        "test:comics": "jest ./test/comics",
+        "test:movies": "jest ./test/movies",
+        "test:manga": "jest ./test/manga",
+        "test:lightnovels": "jest ./test/light-novels",
+        "test:news": "jest ./test/news",
+        "test:meta": "jest ./test/meta"
     },
-    "engines": {
-        "node": ">=12.5.0",
-        "yarn": ">=1.17.3"
-    },
+    "pre-commit": [
+        "lint",
+        "build"
+    ],
+    "files": [
+        "dist"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/consumet/consumet.ts.git"
     },
-    "author": "prince-ao <princead@tutanota.com>",
+    "keywords": [
+        "consumet",
+        "scraper",
+        "streaming",
+        "anime",
+        "books",
+        "comics",
+        "movies",
+        "manga",
+        "light-novels",
+        "news",
+        "meta"
+    ],
+    "authors": [
+        "https://github.com/riimuru",
+        "https://github.com/prince-ao"
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/consumet/consumet.ts/issues"
     },
     "homepage": "https://github.com/consumet/consumet.ts#readme",
     "dependencies": {
-        "@consumet/extensions": "github:consumet/consumet.ts",
-        "@fastify/cors": "^8.2.0",
-        "@types/fastify-cors": "^2.1.0",
-        "@types/node": "^18.11.17",
-        "@types/ws": "^8.5.3",
-        "axios": "^1.0.0",
-        "chalk": "4.1.2",
-        "cheerio": "1.0.0-rc.12",
-        "dotenv": "^16.0.3",
-        "fastify": "^4.10.2",
-        "fastify-cors": "^6.1.0",
-        "ioredis": "^5.2.4",
-        "reconnecting-websocket": "^4.4.0",
-        "ts-node": "^10.9.1",
-        "typescript": "5.2.2",
-        "ws": "^8.8.1"
+        "ascii-url-encoder": "^1.2.0",
+        "axios": "^0.27.2",
+        "cheerio": "^1.0.0-rc.12",
+        "crypto-js": "^4.1.1",
+        "form-data": "^4.0.0"
     },
     "devDependencies": {
-        "nodemon": "3.0.1",
-        "prettier": "^3.0.0"
+        "@commitlint/cli": "^17.6.3",
+        "@commitlint/config-angular": "^17.6.3",
+        "@types/crypto-js": "^4.1.1",
+        "@types/jest": "^29.5.1",
+        "@types/node": "^20.2.1",
+        "@types/ws": "^8.5.4",
+        "auto-changelog": "^2.4.0",
+        "cloudscraper": "^4.6.0",
+        "husky": "^8.0.3",
+        "is-ci": "^3.0.1",
+        "jest": "^29.5.0",
+        "pre-commit": "^1.2.2",
+        "prettier": "^2.8.8",
+        "request": "^2.88.2",
+        "rimraf": "^5.0.5",
+        "ts-jest": "^29.1.0",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.4"
+    },
+    "auto-changelog": {
+        "template": "keepachangelog",
+        "preset": "typescript-preset-eslint",
+        "output": "CHANGELOG.md",
+        "commitUrl": "https://github.com/consumet/consumet.ts/commit/{id}",
+        "compareUrl": "https://github.com/consumet/consumet.ts/compare/{from}...{to}",
+        "issueUrl": "https://github.com/consumet/consumet.ts/issues/{id}",
+        "mergeUrl": "https://github.com/consumet/consumet.ts/pull/{id}"
+    },
+    "directories": {
+        "doc": "docs",
+        "example": "examples",
+        "test": "test",
+        "lib": "src"
     }
 }

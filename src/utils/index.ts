@@ -1,25 +1,89 @@
-import { FastifyRequest, FastifyReply, FastifyInstance, RegisterOptions } from 'fastify';
-import { PROVIDERS_LIST } from '@consumet/extensions';
+import {
+  GogoCDN,
+  StreamSB,
+  VidCloud,
+  MixDrop,
+  Kwik,
+  RapidCloud,
+  MegaCloud,
+  StreamTape,
+  VizCloud,
+  Filemoon,
+  BilibiliExtractor,
+  AsianLoad,
+  SmashyStream,
+  StreamHub,
+  VidMoly,
+} from '../extractors';
+import {
+  USER_AGENT,
+  splitAuthor,
+  floorID,
+  formatTitle,
+  genElement,
+  capitalizeFirstLetter,
+  range,
+  getDays,
+  days,
+  isJson,
+  convertDuration,
+  substringAfter,
+  substringBefore,
+  compareTwoStrings,
+} from './utils';
+import {
+  anilistSearchQuery,
+  anilistMediaDetailQuery,
+  kitsuSearchQuery,
+  anilistTrendingQuery,
+  anilistPopularQuery,
+  anilistAiringScheduleQuery,
+  anilistGenresQuery,
+  anilistAdvancedQuery,
+  anilistSiteStatisticsQuery,
+  anilistCharacterQuery,
+} from './queries';
+import { parsePostInfo } from './getComics';
 
-import RapidCloud from './rapid-cloud';
-import BilibiliUtilis from './bilibili';
-import ImageProxy from './image-proxy';
-import M3U8Proxy from './m3u8-proxy';
-import Providers from './providers';
-import ZoroKey from './key';
-
-const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
-  //await fastify.register(new RapidCloud().returnSID);
-  await fastify.register(new BilibiliUtilis('en_US').returnDASH);
-  await fastify.register(new BilibiliUtilis('en_US').returnVTT);
-  await fastify.register(new ImageProxy().getImageProxy);
-  await fastify.register(new M3U8Proxy().getM3U8Proxy);
-  await fastify.register(new Providers().getProviders);
-  await fastify.register(new ZoroKey().getKey);
-
-  fastify.get('/', async (request: any, reply: any) => {
-    reply.status(200).send('Welcome to Consumet Utils!');
-  });
+export {
+  USER_AGENT,
+  GogoCDN,
+  StreamSB,
+  SmashyStream,
+  StreamHub,
+  splitAuthor,
+  floorID,
+  formatTitle,
+  parsePostInfo,
+  genElement,
+  capitalizeFirstLetter,
+  VidCloud,
+  MixDrop,
+  Kwik,
+  anilistSearchQuery,
+  anilistMediaDetailQuery,
+  kitsuSearchQuery,
+  range,
+  RapidCloud,
+  MegaCloud,
+  StreamTape,
+  VizCloud,
+  anilistTrendingQuery,
+  anilistPopularQuery,
+  anilistAiringScheduleQuery,
+  anilistGenresQuery,
+  anilistAdvancedQuery,
+  anilistSiteStatisticsQuery,
+  Filemoon,
+  anilistCharacterQuery,
+  getDays,
+  days,
+  isJson,
+  convertDuration,
+  BilibiliExtractor,
+  AsianLoad,
+  substringAfter,
+  substringBefore,
+  compareTwoStrings,
+  VidMoly,
 };
-
-export default routes;
