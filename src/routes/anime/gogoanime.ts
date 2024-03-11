@@ -42,6 +42,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       redisCacheTime,
     ) : await gogoanime.search(query, page);
 
+
     reply.status(200).send(res);
   });
 
@@ -93,7 +94,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
 
   fastify.get('/genre/list', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      
+
       const res = redis ? await cache.fetch(
         redis as Redis,
         `${redisPrefix}genre-list`,
